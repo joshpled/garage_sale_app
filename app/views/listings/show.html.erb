@@ -1,1 +1,21 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h2>Hello, <%=current_user.username.capitalize%></h2>
+
+ <div class="content">
+      <h3><%=@listing.title%></h3><br>
+      <table style="width:100%">
+      <tr>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Age</th>
+  </tr>
+  
+      <%@listing.items.each do |i|%>
+      
+        <tr><td><%=i.name%></td>
+             <td><%=i.category%></td>
+            <td><%=i.price%></td></tr>
+
+      <%end%>
+
+      </table>
+    </div>

@@ -11,12 +11,13 @@ class ListingsController < ApplicationController
   end
 
   # POST: /listings
-  post "/listings" do
+  post "/listings/new" do
     redirect "/listings"
   end
 
   # GET: /listings/5
   get "/listings/:id" do
+    @listing  = current_user.listings.find_by_id(params[:id])
     erb :"/listings/show.html"
   end
 

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET: /users
   get "/users" do
     if logged_in?
-      erb :"/users/index.html"
+      erb :"/users/show.html"
     else
       redirect :'/'
     end 
