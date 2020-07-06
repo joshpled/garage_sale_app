@@ -23,7 +23,9 @@ tr:nth-child(even) {
      
 <%if @listing.items.empty?%>
 <h3>List is empty, add an item!</h3>
+<%if logged_in? && current_user%>
 <button>Add Item</button>
+<%end%>
 <%else%>
 
       <table style="width:100%">
@@ -37,7 +39,7 @@ tr:nth-child(even) {
       
         <tr><td><%=i.name%></td>
              <td><%=i.category%></td>
-            <td><%=i.price%></td></tr>
+            <td>$<%=sprintf("%.2f", i.price)%></td></tr>
 
       <%end%>
 

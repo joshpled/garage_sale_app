@@ -1,1 +1,11 @@
-<h1>This is the Model's index page.</h1>
+ <div class="content">
+ 
+      <h3>Current Listings:</h3><br>
+      <% if Listing.all.empty?%>
+      <p>No Listings! Create One!</p>
+      <%end%>
+      <%Listing.all.each do |l|%>
+      <a href="/listings/<%=l.id%>"><p><%=l.title%></p></a>
+      <%end%>
+      <br>
+    </div>

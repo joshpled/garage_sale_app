@@ -10,6 +10,13 @@ class ItemsController < ApplicationController
     erb :"/items/new.html"
   end
 
+    # POST: /items/new
+  post "/items/new" do
+    item = Item.new(params)
+    item.save
+    redirect '/users'
+  end
+
   # POST: /items
   post "/items" do
     redirect "/items"

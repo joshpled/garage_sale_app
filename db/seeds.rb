@@ -1,9 +1,14 @@
 user2 = User.new(username: "callie", email: "callie@gmail.com", password: "chancelor2A!")
 user3 = User.new(username: "zullie", email: "zullie@gmail.com", password: "chancelor3A!")
 
+user2.save
+user3.save
+
 listing2 = Listing.new(title: "Second Listing", description: "New listing")
 listing3 = Listing.new(title: "Third Listing", description: "New listing")
 
+listing2.save
+listing3.save
 
 item1 = Item.new(name: "car", price: 1.00, category: "cat1")
 item2 = Item.new(name: "toy", price: 1.00, category: "cat1")
@@ -21,8 +26,14 @@ item5.save
 item6.save
 item7.save
 
-listing2.items << (item1, item2, item3)
-listing3.items << (item4, item5, item6, item7)
+listing2.items<<item1
+listing2.items<<item2
+listing2.items<<item3
+
+listing3.items<<item4
+listing3.items<<item5
+listing3.items<<item6
+listing3.items<<item7
 
 user2.listings<<listing2
 user3.listings<<listing3

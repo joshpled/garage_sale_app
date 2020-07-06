@@ -37,6 +37,15 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET: /users/:id
+  get "/users/:id" do
+    if logged_in?
+      erb :"/users/edit.html"
+    else
+      redirect :'/'
+    end 
+  end
+
   #POST: /users/signup
   post "/users/signup" do
     @user = User.new(params)
