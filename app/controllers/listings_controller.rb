@@ -12,7 +12,14 @@ class ListingsController < ApplicationController
 
   # POST: /listings
   post "/listings/new" do
-    redirect "/listings"
+    listing = Listing.new(params)
+    listing.save
+    current_user.listings<<listing
+    if listing
+    redirect "/users"
+    else
+      redirect "/listings/new"
+    end 
   end
 
   # GET: /listings/5

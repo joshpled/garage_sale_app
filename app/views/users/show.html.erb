@@ -1,11 +1,14 @@
 <h2>Hello, <%=current_user.username.capitalize%></h2>
 
  <div class="content">
- <a href="/listings/new"><button>New Listing</button></a><br>
+ 
       <h3>Current Listings:</h3><br>
+      <% if current_user.listings.empty?%>
+      <p>No Listings! Create One!</p>
+      <%end%>
       <%current_user.listings.each do |l|%>
       <a href="/listings/<%=l.id%>"><p><%=l.title%></p></a>
       <%end%>
       <br>
-      <a href="/users/logout"><button>Logout</button></a>
+     <a href="/listings/new"><button>New Listing</button></a>
     </div>

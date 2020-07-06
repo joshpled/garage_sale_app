@@ -42,6 +42,9 @@ li a:hover {
   <body>
   <ul>
   <li><a class="active" href="/">Home</a></li>
+  <%if logged_in?%>
+  <li><a href="/users/logout">Logout</a></li>
+  <%end%>
 </ul>
     <div class="wrapper">
 
