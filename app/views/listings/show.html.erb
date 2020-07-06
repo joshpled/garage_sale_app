@@ -1,12 +1,36 @@
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
 <h2>Hello, <%=current_user.username.capitalize%></h2>
 
  <div class="content">
       <h3><%=@listing.title%></h3><br>
+     
+<%if @listing.items.empty?%>
+<h3>List is empty, add an item!</h3>
+<button>Add Item</button>
+<%else%>
+
       <table style="width:100%">
       <tr>
-    <th>Firstname</th>
-    <th>Lastname</th>
-    <th>Age</th>
+    <th>Item</th>
+    <th>Category</th>
+    <th>Price</th>
   </tr>
   
       <%@listing.items.each do |i|%>
@@ -18,4 +42,5 @@
       <%end%>
 
       </table>
+      <%end%>
     </div>
