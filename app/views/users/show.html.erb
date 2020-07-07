@@ -2,7 +2,7 @@
 
  <div class="content">
  
-      <h3>Current Listings:</h3><br>
+      <h3>Your Current Listings:</h3><br>
       <% if current_user.listings.empty?%>
       <p>No Listings! Create One!</p>
       <%end%>
@@ -10,5 +10,13 @@
       <a href="/listings/<%=l.id%>"><p><%=l.title%></p></a>
       <%end%>
       <br>
-     <a href="/listings/new"><button>New Listing</button></a>
+     <a href="/listings/new"><button class="button button2">New Listing</button></a>
     </div>
+
+
+
+
+
+
+
+   

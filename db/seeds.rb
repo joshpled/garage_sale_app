@@ -30,6 +30,8 @@ listing2.items<<item1
 listing2.items<<item2
 listing2.items<<item3
 
+listing2.items(item1,item2,item3)
+
 listing3.items<<item4
 listing3.items<<item5
 listing3.items<<item6

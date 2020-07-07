@@ -1,30 +1,13 @@
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+<h2><%=@listing.title%></h2>
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
 
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
-
-<h2>Hello, <%=current_user.username.capitalize%></h2>
-
- <div class="content">
-      <h3><%=@listing.title%></h3><br>
+ <div class="center">
+      <br>
      
 <%if @listing.items.empty?%>
 <h3>List is empty, add an item!</h3>
 <%if logged_in? && current_user%>
-<button>Add Item</button>
+<button class="button button1">Add Item</button>
 <%end%>
 <%else%>
 
@@ -44,5 +27,12 @@ tr:nth-child(even) {
       <%end%>
 
       </table>
+      <%end%>
+<BR>
+
+      <%if @listing.user_id == session[:user_id]%>
+      <button class="button button1">Add Item</button>
+      <button class="button button2">Edit Listing</button>
+      <button class="button button1">Delete Listing</button>
       <%end%>
     </div>

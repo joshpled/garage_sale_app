@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 
-
   # GET: /users
   get "/users" do
     if logged_in?
@@ -9,15 +8,6 @@ class UsersController < ApplicationController
       redirect :'/'
     end 
   end
-
-  #GET: /users/logout
-  get '/users/logout' do 
-    if logged_in?
-      logout!
-      redirect '/'
-    end
-      redirect '/'
-  end 
 
   # GET: /users/new
   get "/users/signup" do
@@ -35,15 +25,6 @@ class UsersController < ApplicationController
     else
       erb :"/users/login.html"
     end
-  end
-
-  # GET: /users/:id
-  get "/users/:id" do
-    if logged_in?
-      erb :"/users/edit.html"
-    else
-      redirect :'/'
-    end 
   end
 
   #POST: /users/signup
@@ -67,6 +48,14 @@ class UsersController < ApplicationController
           redirect '/login'
       end
   end
-
+  
+  #GET: /users/logout
+  get '/users/logout' do 
+    if logged_in?
+      logout!
+      redirect '/'
+    end
+      redirect '/'
+  end 
 end 
 

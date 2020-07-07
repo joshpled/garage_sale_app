@@ -4,8 +4,24 @@
       <% if Listing.all.empty?%>
       <p>No Listings! Create One!</p>
       <%end%>
+
+      <table style="width:100%">
+      <tr>
+    <th>Date</th>
+    <th>Title</th>
+    <th>User</th>
+  </tr>
       <%Listing.all.each do |l|%>
-      <a href="/listings/<%=l.id%>"><p><%=l.title%></p></a>
+      <tr>
+      <td><%=l.created_at.strftime("%m/%d/%y")%></td>
+      <td><a href="/listings/<%=l.id%>"><%=l.title%></a></td>
+      <td><%=User.all.find_by_id(l.user_id).username%></td>
+      <tr>
+
       <%end%>
+      </table>
       <br>
     </div>
+
+  
+      
