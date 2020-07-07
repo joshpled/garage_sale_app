@@ -38,16 +38,42 @@ class ListingsController < ApplicationController
 
   # GET: /listings/5/edit
   get "/listings/:id/edit" do
-    erb :"/listings/edit.html"
+    if logged_in?
+      @listing  = current_user.listings.find_by_id(params[:id])
+      erb :"/listings/edit.html"
+      else
+        redirect "/users"
+      end 
   end
 
   # PATCH: /listings/5
   patch "/listings/:id" do
-    redirect "/listings/:id"
+    if logged_in?
+      listing = current_user.listings.find_by_id(params[:id])
+      if listing
+          if listing.update(title: params[:title], description: params[:description])
+              redirect "/listings/#{listing.id}"
+          else
+              redirect "/listings/#{listing.id}/edit"
+          end
+      else
+        redirect '/listings'
+    end
+  else
+      redirect '/users/login'
+  end
   end
 
   # DELETE: /listings/5/delete
-  delete "/listings/:id/delete" do
-    redirect "/listings"
-  end
-end
+  delete "/listings/:id" do
+        if logged_in?
+          listing = Listing.find_by_id(params[:id])
+          if listing
+              listing.delete
+          end
+          redirect '/listings'
+      else
+          redirect '/users/login'
+      end
+    end
+  end 

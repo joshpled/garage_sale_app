@@ -1,14 +1,13 @@
-<h2><%=@listing.title%></h2>
+<h2 style="text-align: center;"><%=@listing.title%></h2>
 
-
+<h4 style="text-align: center;"><%=@listing.description%></h4>
+<br>
  <div class="center">
-      <br>
+ <br>
      
 <%if @listing.items.empty?%>
 <h3>List is empty, add an item!</h3>
-<%if logged_in? && current_user%>
-<button class="button button1">Add Item</button>
-<%end%>
+
 <%else%>
 
       <table style="width:100%">
@@ -17,7 +16,6 @@
     <th>Category</th>
     <th>Price</th>
   </tr>
-  
       <%@listing.items.each do |i|%>
       
         <tr><td><%=i.name%></td>
@@ -32,7 +30,14 @@
 
       <%if @listing.user_id == session[:user_id]%>
       <button class="button button1">Add Item</button>
-      <button class="button button2">Edit Listing</button>
-      <button class="button button1">Delete Listing</button>
+      <a href="/listings/<%=@listing.id%>/edit"><button class="button button2">Edit Listing</button></a>
+      <form method="POST" action="/listings/<%= @listing.id %>">
+    <input type="hidden" id="hidden" name="_method" value="delete">
+    <button type="submit" class="button button1">Delete Listing</button>
+    </form>
       <%end%>
+
+    <br>
+    <br>
+    <p style="text-align: right;">Created by <%=User.all.find_by_id(@listing.user_id).username%> on <%=@listing.created_at.strftime("%m/%d/%y")%>.</p>
     </div>
