@@ -7,6 +7,7 @@ class ItemsController < ApplicationController
 
   # GET: /items/new
   get "/items/new" do
+    binding.pry
     erb :"/items/new.html"
   end
 
@@ -14,8 +15,13 @@ class ItemsController < ApplicationController
   post "/items/new" do
     item = Item.new(params)
     item.save
-    redirect '/users'
   end
+
+  post "items/new/more" do
+    item = item.new(params)
+    item.save
+    redirect '/items/new'
+  end 
 
   # POST: /items
   post "/items" do

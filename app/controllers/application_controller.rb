@@ -4,6 +4,8 @@ require 'pry'
 
 class ApplicationController < Sinatra::Base
 
+  @@listing = nil
+
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
@@ -32,7 +34,8 @@ class ApplicationController < Sinatra::Base
 
     def logout!
       session.clear
-    end 
+    end
+
   end
 
 end

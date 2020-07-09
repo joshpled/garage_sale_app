@@ -12,12 +12,13 @@
     <th>User</th>
   </tr>
       <%Listing.all.each do |l|%>
+      <%if !l.items.empty?%>
       <tr>
       <td><%=l.created_at.strftime("%m/%d/%y")%></td>
       <td><a href="/listings/<%=l.id%>"><%=l.title%></a></td>
       <td><%=User.all.find_by_id(l.user_id).username%></td>
       <tr>
-
+      <%end%>
       <%end%>
       </table>
       <br>

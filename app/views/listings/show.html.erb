@@ -15,12 +15,17 @@
     <th>Item</th>
     <th>Category</th>
     <th>Price</th>
+    <%if @listing.user_id == session[:user_id]%><th>Sold?</th><%end%>
   </tr>
       <%@listing.items.each do |i|%>
       
         <tr><td><%=i.name%></td>
              <td><%=i.category%></td>
-            <td>$<%=sprintf("%.2f", i.price)%></td></tr>
+            <td>$<%=sprintf("%.2f", i.price)%></td>
+            <%if @listing.user_id == session[:user_id]%>
+            <td><input type="checkbox" id="solditem" name="solditem" value="solditem"></td>>
+            <%end%>
+            </tr>
 
       <%end%>
 
@@ -29,12 +34,15 @@
 <BR>
 
       <%if @listing.user_id == session[:user_id]%>
-      <button class="button button1">Add Item</button>
+      <a href="/items/new"><button class="button button1">Add Item</button></a>
       <a href="/listings/<%=@listing.id%>/edit"><button class="button button2">Edit Listing</button></a>
       <form method="POST" action="/listings/<%= @listing.id %>">
     <input type="hidden" id="hidden" name="_method" value="delete">
     <button type="submit" class="button button1">Delete Listing</button>
     </form>
+    <%else%>
+    
+     <a href = "mailto: <%= @listing.user.email %>"><button class="button button1">Contact Seller!</button></a>
       <%end%>
 
     <br>

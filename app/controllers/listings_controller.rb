@@ -19,11 +19,9 @@ class ListingsController < ApplicationController
     listing = Listing.new(params)
     listing.save
     current_user.listings<<listing
-    if listing
-    redirect "/users"
-    else
-      redirect "/listings/new"
-    end 
+    current_listing(listing)
+    # binding.pry
+    redirect '/items/new'
   end
 
   # GET: /listings/5
@@ -71,7 +69,7 @@ class ListingsController < ApplicationController
           if listing
               listing.delete
           end
-          redirect '/listings'
+          redirect '/users'
       else
           redirect '/users/login'
       end
