@@ -4,7 +4,6 @@ require 'pry'
 
 class ApplicationController < Sinatra::Base
 
-  @@listing = nil
 
   configure do
     set :public_folder, 'public'

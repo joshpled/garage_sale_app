@@ -7,7 +7,6 @@
      
 <%if @listing.items.empty?%>
 <h3>List is empty, add an item!</h3>
-
 <%else%>
 
       <table style="width:100%">
@@ -23,7 +22,9 @@
              <td><%=i.category%></td>
             <td>$<%=sprintf("%.2f", i.price)%></td>
             <%if @listing.user_id == session[:user_id]%>
-            <td><input type="checkbox" id="solditem" name="solditem" value="solditem"></td>>
+            <td><form method="POST" action="/items/<%=i.id%>?_method=DELETE">
+    <button type="submit">Sold!</button>
+</form></td>
             <%end%>
             </tr>
 

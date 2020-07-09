@@ -19,8 +19,6 @@ class ListingsController < ApplicationController
     listing = Listing.new(params)
     listing.save
     current_user.listings<<listing
-    current_listing(listing)
-    # binding.pry
     redirect '/items/new'
   end
 
@@ -67,6 +65,9 @@ class ListingsController < ApplicationController
         if logged_in?
           listing = Listing.find_by_id(params[:id])
           if listing
+              listing.items.each do |i|
+                Item.all.find_by_id(i.id).delete
+              end 
               listing.delete
           end
           redirect '/users'

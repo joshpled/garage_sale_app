@@ -7,7 +7,6 @@ class ItemsController < ApplicationController
 
   # GET: /items/new
   get "/items/new" do
-    binding.pry
     erb :"/items/new.html"
   end
 
@@ -15,6 +14,8 @@ class ItemsController < ApplicationController
   post "/items/new" do
     item = Item.new(params)
     item.save
+    current_user.listings.last.items<<item
+    redirect "/listings/#{current_user.listings.last.id}"
   end
 
   post "items/new/more" do
@@ -44,7 +45,12 @@ class ItemsController < ApplicationController
   end
 
   # DELETE: /items/5/delete
-  delete "/items/:id/delete" do
-    redirect "/items"
+  post "/items/:id" do
+
+    item = Item.find_by_id(params[:id])
+    listing = Listing.all.find_by_id(item.listing.id)
+    listing.items.find_by_id(params[:id]).delete
+    item.delete
+    redirect "/listings/#{listing.id}"
   end
 end
