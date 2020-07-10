@@ -27,6 +27,14 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/users/delete' do
+    if logged_in?
+      erb :"users/delete_account.html"
+    else
+      erb :"/users/login.html"
+    end
+  end
+
   #POST: /users/signup
   post "/users/signup" do
     @user = User.new(params)
@@ -45,7 +53,7 @@ class UsersController < ApplicationController
           session[:user_id] = @user.id
           redirect '/users'
       else
-          redirect '/login'
+          redirect '/users/login'
       end
   end
   
@@ -57,5 +65,26 @@ class UsersController < ApplicationController
     end
       redirect '/'
   end 
+
+
+  delete "/users/:id" do
+    if logged_in?
+      user = User.all.find_by_id(params[:id])
+      if user
+        user.items.each do |i|
+          Items.all.find_by_id(i.id).delete
+        end 
+        user.listings.each do |l|
+          Listing.all.find_by_id(l.id).delete
+        end 
+        user.delete
+        session.clear
+      end
+      redirect '/'
+      else
+        redirect '/users/login'
+      end
+    end
+
 end 
 
