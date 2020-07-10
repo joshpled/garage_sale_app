@@ -2,7 +2,12 @@ class ItemsController < ApplicationController
 
   # GET: /items
   get "/items" do
+    if logged_in?
+    @items = current_user.items
     erb :"/items/index.html"
+    else
+      redirect '/'
+    end 
   end
 
   # GET: /items/new
@@ -18,12 +23,6 @@ class ItemsController < ApplicationController
     redirect "/listings/#{current_user.listings.last.id}"
   end
 
-  post "items/new/more" do
-    item = item.new(params)
-    item.save
-    redirect '/items/new'
-  end 
-
   # POST: /items
   post "/items" do
     redirect "/items"
@@ -36,17 +35,31 @@ class ItemsController < ApplicationController
 
   # GET: /items/5/edit
   get "/items/:id/edit" do
+    @item = Item.all.find_by_id(params[:id])
     erb :"/items/edit.html"
   end
 
   # PATCH: /items/5
   patch "/items/:id" do
-    redirect "/items/:id"
+    if logged_in?
+      item = current_user.items.find_by_id(params[:id])
+      binding.pry
+      if item
+          if item.update(name: params[:name], category: params[:category], price: params[:price], sold: params[:sold])
+              redirect "/listings/#{item.listing.id}"
+          else
+              redirect "/items/#{item.id}/edit"
+          end
+      else
+        redirect '/users'
+    end
+  else
+      redirect '/users/login'
   end
-
+  end
+  
   # DELETE: /items/5/delete
   post "/items/:id" do
-
     item = Item.find_by_id(params[:id])
     listing = Listing.all.find_by_id(item.listing.id)
     listing.items.find_by_id(params[:id]).delete

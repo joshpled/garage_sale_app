@@ -14,7 +14,7 @@
     <th>Item</th>
     <th>Category</th>
     <th>Price</th>
-    <%if @listing.user_id == session[:user_id]%><th>Sold?</th><%end%>
+    <%if @listing.user_id == session[:user_id]%><th>Sold?</th><th>Edit</th><%end%>
   </tr>
       <%@listing.items.each do |i|%>
       
@@ -24,7 +24,7 @@
             <%if @listing.user_id == session[:user_id]%>
             <td><form method="POST" action="/items/<%=i.id%>?_method=DELETE">
     <button type="submit">Sold!</button>
-</form></td>
+</form></td><td><a href="/items/<%=i.id%>/edit"><button>Edit</button></a></td>
             <%end%>
             </tr>
 
