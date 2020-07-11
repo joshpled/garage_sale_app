@@ -17,7 +17,7 @@
             <td><a href="/listings/<%=i.listing_id%>"><%=Listing.all.find_by_id(i.listing_id).title%></a></td>
             <td>
             <%if i.sold == false%>
-            <form method="POST" action="/items/<%=i.id%>?_method=DELETE">
+            <form method="POST" action="/items/<%=i.id%>/sold?_method=PATCH">
                 <button type="submit">Sold</button></form></td>
                 <%else%>
                 SOLD

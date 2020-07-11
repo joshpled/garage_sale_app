@@ -28,27 +28,46 @@ class ItemsController < ApplicationController
     redirect "/items"
   end
 
-  # GET: /items/5
-  get "/items/:id" do
-    erb :"/items/show.html"
-  end
-
   # GET: /items/5/edit
   get "/items/:id/edit" do
     @item = Item.all.find_by_id(params[:id])
     erb :"/items/edit.html"
   end
 
+  get "/items/restore" do
+    if logged_in?
+    @items = current_user.items
+    erb :"/items/restore_sold.html"
+    else
+      redirect '/'
+    end 
+  end
+
+
   # PATCH: /items/5
   patch "/items/:id" do
     if logged_in?
       item = current_user.items.find_by_id(params[:id])
-      binding.pry
       if item
-          if item.update(name: params[:name], category: params[:category], price: params[:price], sold: params[:sold])
+          if item.update(name:params[:name],category:params[:category], price:params[:price])
               redirect "/listings/#{item.listing.id}"
           else
               redirect "/items/#{item.id}/edit"
+          end
+      else
+        redirect '/users'
+    end
+  else
+      redirect '/users/login'
+  end
+  end
+
+  patch "/items/:id/sold" do
+    if logged_in?
+      item = current_user.items.find_by_id(params[:id])
+      if item
+          if item.update(sold:params[:name])
+              redirect "/items"
           end
       else
         redirect '/users'
