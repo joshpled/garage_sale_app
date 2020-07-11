@@ -1,0 +1,15 @@
+<h2>Edit Your User Details!</h2>
+<div class="center">
+<form method="post" action="/users/<%=current_user.id%>">
+    <input type="hidden" id="hidden" name="_method" value="patch">
+        <br>
+        <label>Username:</label>
+        <input type="text" name="username" value="<%=current_user.username %>">
+        <br>
+        <label>Email:</label>
+        <input type="text" name="email" value="<%= current_user.email %>">
+        <br>
+        <input type="submit" class="button button1" value="Submit Changes">
+</form>
+<a href="/"><button class="button button2" >Cancel</button></a>
+</div>

@@ -18,6 +18,7 @@
   </tr>
       <%@listing.items.each do |i|%>
       
+        <%if i.sold == false%>
         <tr><td><%=i.name%></td>
              <td><%=i.category%></td>
             <td>$<%=sprintf("%.2f", i.price)%></td>
@@ -27,7 +28,7 @@
 </form></td><td><a href="/items/<%=i.id%>/edit"><button>Edit</button></a></td>
             <%end%>
             </tr>
-
+        <%end%>
       <%end%>
 
       </table>
