@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
     has_many :items, through: :listings
     has_secure_password
 
+  validates :first_name, :last_name, presence: true
+
     PASSWORD_FORMAT = /\A
   (?=.{8,})          # Must contain 8 or more characters
   (?=.*\d)           # Must contain a digit

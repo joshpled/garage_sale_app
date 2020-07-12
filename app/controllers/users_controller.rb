@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   # GET: /users/new
   get "/users/signup" do
+    @signup_error = flash[:signup_error]
     if logged_in?
       redirect '/users'
     else
@@ -36,8 +37,9 @@ class UsersController < ApplicationController
         session[:user_id] = @user.id
         redirect '/users'
     else
-        redirect '/users/signup'
-    end
+      flash[:signup_error] = @user.errors.messages[:password]
+      redirect '/users/signup'
+    end 
   end 
 
   # POST: /users 
