@@ -2,11 +2,8 @@ class UsersController < ApplicationController
 
   # GET: /users
   get "/users" do
-    if logged_in?
-      erb :"/users/show.html"
-    else
-      redirect :'/'
-    end 
+    logged_in_else_redirect_login
+    erb :"/users/show.html"
   end
 
   # GET: /users/new
@@ -20,11 +17,8 @@ class UsersController < ApplicationController
   
   #GET: /users/login
   get '/users/login' do
-    if logged_in?
-      redirect '/users'
-    else
-      erb :"/users/login.html"
-    end
+    @login_error = flash[:login_error]
+    erb :"/users/login.html"
   end
 
   get '/users/delete' do
@@ -53,6 +47,7 @@ class UsersController < ApplicationController
           session[:user_id] = @user.id
           redirect '/users'
       else
+          flash[:login_error] = "Please enter the correct username or password"
           redirect '/users/login'
       end
   end

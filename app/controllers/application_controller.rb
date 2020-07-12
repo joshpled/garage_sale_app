@@ -4,21 +4,20 @@ require 'pry'
 
 class ApplicationController < Sinatra::Base
 
-
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "secret" 
+    use Rack::Flash
   end
 
   get "/" do
-    @user = current_user if logged_in?
-    if logged_in?
+    if current_user && logged_in?
       redirect '/users'
     else
-    erb :welcome
-    end 
+      erb :welcome
+    end
   end
 
   
@@ -26,6 +25,18 @@ class ApplicationController < Sinatra::Base
     def logged_in?
       !!session[:user_id]
     end
+
+    def logged_in_else_redirect_login
+      if !logged_in?
+        redirect '/users/login'
+      end
+    end 
+
+    def logged_in_else_redirect_home
+      if !logged_in?
+        redirect '/'
+      end 
+    end 
 
     def current_user
       @user ||= User.find_by_id(session[:user_id]) if logged_in?

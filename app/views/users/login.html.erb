@@ -1,3 +1,11 @@
+<% if @login_error != nil %>
+                        <div class="alert alert-danger" role="alert">
+                         <%= @login_error%>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <% end %>
 <center><div class="container">
 <form action="/users/login" method="post">
 <label>Username: </label><input type="text" name="username"><br>
@@ -6,3 +14,4 @@
 
 </form>
 </div><center>
+
