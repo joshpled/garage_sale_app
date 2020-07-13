@@ -37,7 +37,6 @@ class UsersController < ApplicationController
         session[:user_id] = @user.id
         redirect '/users'
     else
-      flash[:signup_error] = @user.errors.messages[:password]
       redirect '/users/signup'
     end 
   end 

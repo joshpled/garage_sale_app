@@ -7,11 +7,8 @@ class ListingsController < ApplicationController
 
   # GET: /listings/new
   get "/listings/new" do
-    if logged_in?
+    logged_in_else_redirect_login
       erb :"/listings/new.html"
-    else
-      redirect '/users'
-    end
   end
 
   # POST: /listings
@@ -24,12 +21,9 @@ class ListingsController < ApplicationController
 
   # GET: /listings/5
   get "/listings/:id" do
-    if logged_in?
+    logged_in_else_redirect_login
     @listing  = Listing.all.find_by_id(params[:id])
     erb :"/listings/show.html"
-    else
-      redirect "/users"
-    end 
   end
 
   # GET: /listings/5/edit

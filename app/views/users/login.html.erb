@@ -1,17 +1,17 @@
-<% if @login_error != nil %>
-                        <div class="alert alert-danger" role="alert">
-                         <%= @login_error%>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    <% end %>
+<br>
 <center><div class="container">
-<form action="/users/login" method="post">
-<label>Username: </label><input type="text" name="username"><br>
-<label>Password: </label><input type="password" name="password"><br>
-<input type="submit" value="Submit">
 
+<form action='/users/login' method="post">
+  
+  <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+  <label for="inputUsername" class="sr-only">Username</label>
+  <input name="username" type="username" id="inputUsername" class="form-control" placeholder="Username">
+  
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password">
+<br>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  
 </form>
-</div><center>
 
+</div></center>
