@@ -1,28 +1,34 @@
- <div class="content">
- 
-      <h3>Current Listings:</h3><br>
-      <% if Listing.all.empty?%>
-      <p>No Listings! Create One!</p>
-      <%end%>
+ <div class="container">
+      <div class="jumbotron"><h1 class="display-4">GARAGE SALE LISTINGS</h1>
+      <p class="lead">Keep social distancing protocols while buying anything!</p></div>
+      <br>
 
-      <table style="width:100%">
-      <tr>
-    <th>Date</th>
-    <th>Title</th>
-    <th>User</th>
-  </tr>
-      <%Listing.all.each do |l|%>
+    <%if @test.empty?%>
+    <h1 class="display-3 text-center">No Listings Available</h1>
+    <%else%>
+ 
+      <table class="table">
+      <thead>
+        <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Title</th>
+      <th scope="col">User</th>
+        </tr>
+        </thead>
+    <tbody>
+      <%Listing.all.order(created_at: :desc).each do |l|%>
       <%if !l.items.empty?%>
       <tr>
       <td><%=l.created_at.strftime("%m/%d/%y")%></td>
       <td><a href="/listings/<%=l.id%>"><%=l.title%></a></td>
       <td><%=User.all.find_by_id(l.user_id).username%></td>
-      <tr>
+      </tr>
       <%end%>
       <%end%>
+       </tbody>
       </table>
+      <%end%>
       <br>
     </div>
 
-  
-      
+

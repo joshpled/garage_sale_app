@@ -7,16 +7,18 @@
             <%if current_user.listings.empty?%>
                 <p>No Listings! Create One!</p>
             <%end%>
-
-      <%current_user.listings.each do |l|%>
-      <a href="/listings/<%=l.id%>"><p><%=l.title%></p></a>
+<div class="list-group">
+      <%current_user.listings.order(created_at: :desc).each do |l|%>
+      <a href="/listings/<%=l.id%>" class="list-group-item list-group-item-action"><strong><%=l.title%></strong><span class="float-right">created on <strong><%=l.created_at.strftime("%m/%d/%y")%></strong></span></a>
       <%end%>
-
+</div>
     <br>
      <a href="/listings/new"><button class="btn btn-primary">New Listing</button></a>
      <a href="/items"><button class="btn btn-secondary">All Items</button></a>
+          <br><br>
      </div>
-  <div class="col-sm-3">
+
+  <div class="col-float-3">
  <h3>User Settings:</h3><br>
 <a href="/users/edit"><button class="btn btn-info" style="align: right;">Edit User Details</button></a>
 <br><br>

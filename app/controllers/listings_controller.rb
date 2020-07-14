@@ -2,6 +2,8 @@ class ListingsController < ApplicationController
 
   # GET: /listings
   get "/listings" do
+    variable = Listing.all.collect {|l| l.items}
+    @test = variable.flatten
     erb :"/listings/index.html"
   end
 
@@ -28,12 +30,9 @@ class ListingsController < ApplicationController
 
   # GET: /listings/5/edit
   get "/listings/:id/edit" do
-    if logged_in?
+    logged_in_else_redirect_login
       @listing  = current_user.listings.find_by_id(params[:id])
       erb :"/listings/edit.html"
-      else
-        redirect "/users"
-      end 
   end
 
   # PATCH: /listings/5

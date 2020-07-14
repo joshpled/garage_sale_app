@@ -1,29 +1,30 @@
-<h2 style="text-align: center;"><%=@listing.title%></h2>
-
-<h4 style="text-align: center;"><%=@listing.description%></h4>
+<div class="jumbotron" id="title">
+<h1 class="display-4" style="text-align: center;"><%=@listing.title%></h1>
+      <p class="lead" style="text-align: center;"><%=@listing.description%></p></div>
 <br>
- <div class="center">
+ <div class="container">
  <br>
      
 <%if @listing.items.empty?%>
-<h3>List is empty, add an item!</h3>
+<h3 class="display-4">List is empty, add an item!</h3>
 <%else%>
-
-      <table style="width:100%">
-      <tr>
-    <th>Item</th>
-    <th>Category</th>
-    <th>Price</th>
-    <%if @listing.user_id == session[:user_id]%><th>Sold?</th><th>Edit</th><%end%>
+<table class="table">
+      <thead>
+        <tr>
+      <th scope="col">Item</th>
+      <th scope="col">Category</th>
+      <th scope="col">Price</th>
+    <%if @listing.user_id == session[:user_id]%><th scope="col">Sold?</th><th scope="col">Edit</th><%end%>
   </tr>
+  </thead>
+  <tbody>
       <%@listing.items.each do |i|%>
-      
         <%if i.sold == false%>
         <tr><td><%=i.name%></td>
              <td><%=i.category%></td>
             <td>$<%=sprintf("%.2f", i.price)%></td>
             <%if @listing.user_id == session[:user_id]%>
-            <td><form method="POST" action="/items/<%=i.id%>?_method=DELETE">
+            <td><form method="POST" action="/items/<%=i.id%>?_method=DELETE" class="container">
     <button type="submit">Sold!</button>
 </form></td><td><a href="/items/<%=i.id%>/edit"><button>Edit</button></a></td>
             <%end%>
@@ -31,23 +32,26 @@
         <%end%>
       <%end%>
 
+      </tbody>
       </table>
       <%end%>
 <BR>
 
-      <%if @listing.user_id == session[:user_id]%>
-      <a href="/items/new"><button class="button button1">Add Item</button></a>
-      <a href="/listings/<%=@listing.id%>/edit"><button class="button button2">Edit Listing</button></a>
+      <%if @listing.user_id == session[:user_id] %>
+      <a href="/items/new"><button class="btn btn-primary">Add Item</button></a>
+      <a href="/listings/<%=@listing.id%>/edit"><button class="btn btn-secondary">Edit Listing</button></a>
+      <br><br>
       <form method="POST" action="/listings/<%= @listing.id %>">
-    <input type="hidden" id="hidden" name="_method" value="delete">
-    <button type="submit" class="button button1">Delete Listing</button>
+      <button type="submit" formmethod="post" name="_method" value="delete" class="btn btn-danger">Delete Listing</button>
     </form>
-    <%else%>
+    <%else %>
     
-     <a href = "mailto: <%= @listing.user.email %>"><button class="button button1">Contact Seller!</button></a>
+     <a href = "mailto: <%= @listing.user.email %>"><button class="btn btn-primary">Contact Seller!</button></a>
       <%end%>
 
     <br>
     <br>
     <p style="text-align: right;">Created by <%=User.all.find_by_id(@listing.user_id).username%> on <%=@listing.created_at.strftime("%m/%d/%y")%>.</p>
     </div>
+
+       
