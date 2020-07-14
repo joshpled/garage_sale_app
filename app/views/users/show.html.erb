@@ -1,28 +1,30 @@
 <div class="container">
-<h1 class="jumbotron justify-content-center">Hello, <%=current_user.first_name.capitalize%></h1>
-<div class="row">
-  <div class="col-xs-9 col-md-7">
-      <h3>Your Current Listings:</h3><br>
-
-            <%if current_user.listings.empty?%>
-                <p>No Listings! Create One!</p>
-            <%end%>
-<div class="list-group">
-      <%current_user.listings.order(created_at: :desc).each do |l|%>
-      <a href="/listings/<%=l.id%>" class="list-group-item list-group-item-action"><strong><%=l.title%></strong><span class="float-right">created on <strong><%=l.created_at.strftime("%m/%d/%y")%></strong></span></a>
+  <h1 class="jumbotron justify-content-center">Hello, <%=current_user.first_name.capitalize%></h1>
+  <div class="row">
+    <div class="col-xs-9 col-md-7">
+      <h3>Your Current Listings:</h3>
+      <br>
+      <%if current_user.listings.empty?%>
+        <p>No Listings! Create One!</p>
       <%end%>
-</div>
-    <br>
-     <a href="/listings/new"><button class="btn btn-primary">New Listing</button></a>
-     <a href="/items"><button class="btn btn-secondary">All Items</button></a>
-          <br><br>
-     </div>
-
-  <div class="col-float-3">
- <h3>User Settings:</h3><br>
-<a href="/users/edit"><button class="btn btn-info" style="align: right;">Edit User Details</button></a>
-<br><br>
-<a href="/users/delete"><button class="btn btn-danger" style="align: right;">DELETE MY ACCOUNT</button></a>
-</div>
-</div>
+      <div class="list-group">
+        <%current_user.listings.order(created_at: :desc).each do |l|%>
+          <a href="/listings/<%=l.id%>" class="list-group-item list-group-item-action"><strong><%=l.title%></strong><span class="float-right">created on <strong><%=l.created_at.strftime("%m/%d/%y")%></strong></span></a>
+        <%end%>
+      </div>
+      <br>
+      <a href="/listings/new"><button class="btn btn-primary">New Listing</button></a>
+      <a href="/items"><button class="btn btn-secondary">All Items</button></a>
+      <br>
+      <br>
+    </div>
+    <div class="col-float-3">
+      <h3>User Settings:</h3>
+      <br>
+      <a href="/users/edit"><button class="btn btn-info" style="align: right;">Edit User Details</button></a>
+      <br>
+      <br>
+      <a href="/users/delete"><button class="btn btn-danger" style="align: right;">DELETE MY ACCOUNT</button></a>
+    </div>
+  </div>
 </div>

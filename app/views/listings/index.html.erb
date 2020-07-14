@@ -1,34 +1,33 @@
- <div class="container">
-      <div class="jumbotron"><h1 class="display-4">GARAGE SALE LISTINGS</h1>
-      <p class="lead">Keep social distancing protocols while buying anything!</p></div>
-      <br>
-
-    <%if @test.empty?%>
-    <h1 class="display-3 text-center">No Listings Available</h1>
-    <%else%>
  
-      <table class="table">
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">GARAGE SALE LISTINGS</h1>
+    <p class="lead">Keep social distancing protocols while buying anything!</p>
+  </div>
+  <br>
+  <%if @test.empty?%>
+    <h1 class="display-3 text-center">No Listings Available</h1>
+  <%else%>
+    <table class="table">
       <thead>
         <tr>
-      <th scope="col">Date</th>
-      <th scope="col">Title</th>
-      <th scope="col">User</th>
+          <th scope="col">Date</th>
+          <th scope="col">Title</th>
+          <th scope="col">User</th>
         </tr>
-        </thead>
-    <tbody>
-      <%Listing.all.order(created_at: :desc).each do |l|%>
-      <%if !l.items.empty?%>
-      <tr>
-      <td><%=l.created_at.strftime("%m/%d/%y")%></td>
-      <td><a href="/listings/<%=l.id%>"><%=l.title%></a></td>
-      <td><%=User.all.find_by_id(l.user_id).username%></td>
-      </tr>
-      <%end%>
-      <%end%>
-       </tbody>
-      </table>
-      <%end%>
-      <br>
-    </div>
-
-
+      </thead>
+      <tbody>
+        <%Listing.all.order(created_at: :desc).each do |l|%>
+          <%if !l.items.empty?%>
+            <tr>
+              <td><%=l.created_at.strftime("%m/%d/%y")%></td>
+              <td><a href="/listings/<%=l.id%>"><%=l.title%></a></td>
+              <td><%=User.all.find_by_id(l.user_id).username%></td>
+            </tr>
+          <%end%>
+        <%end%>
+      </tbody>
+    </table>
+  <%end%>
+  <br>
+</div>

@@ -1,35 +1,42 @@
 <div class="jumbotron" id="title">
-<h1 class="display-4" style="text-align: center;">ALL ITEMS</h1></div>
- <div class="container">
- <br>
- <table class="table">
- <thead>
+  <h1 class="display-4" style="text-align: center;">ALL ITEMS</h1>
+</div>
+<div class="container">
+  <br>
+  <table class="table">
+    <thead>
       <tr>
-    <th scope="col">Item</th>
-    <th scope="col">Category</th>
-    <th scope="col">Price</th>
-    <th scope="col">Listing</th>
-    <th scope="col">Sold!</th>
-    <th scope="col">Edit</th>
-  </tr>
-  </thead>
-  <tbody>
+        <th scope="col">Item</th>
+        <th scope="col">Category</th>
+        <th scope="col">Price</th>
+        <th scope="col">Listing</th>
+        <th scope="col">Sold!</th>
+        <th scope="col">Edit</th>
+      </tr>
+    </thead>
+    <tbody>
       <%@items.order(name: :asc).each do |i|%>
-      
-        <tr><td><%=i.name%></td>
-             <td><%=i.category%></td>
-            <td>$<%=sprintf("%.2f", i.price)%></td>
-            <td><a href="/listings/<%=i.listing_id%>"><%=Listing.all.find_by_id(i.listing_id).title%></a></td>
-            <td>
+        <tr>
+          <td><%=i.name%></td>
+          <td><%=i.category%></td>
+          <td>$<%=sprintf("%.2f", i.price)%></td>
+          <td><a href="/listings/<%=i.listing_id%>"><%=Listing.all.find_by_id(i.listing_id).title%></a></td>
+          <td>
             <%if i.sold == false%>
-            <form method="POST" action="/items/<%=i.id%>/sold">
-                <button type="submit" formmethod="post" name="_method" value="patch">Sold</button></form></td>
-                <%else%>
-                SOLD
-                <%end%>
-            <td><a href="/items/<%=i.id%>/edit"><button>Edit</button></a></td>
-            <%end%>
-            </tr>
-</tbody>
-      </table>
-      </div>
+              <form method="POST" action="/items/<%=i.id%>/sold">
+                <button type="submit" formmethod="post" name="_method" value="patch">Sold</button></form>
+            </td>
+          <%else%>
+            SOLD
+          <%end%>
+          <td><a href="/items/<%=i.id%>/edit"><button>Edit</button></a></td>
+        <%end%>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<%if @items.any? {|item| item.sold == true}%>
+  <div class="container" align="right">
+    <a href="/items/restore"><button class="btn btn-dark">Restore Sold</button></a>
+  </div>
+<%end%>

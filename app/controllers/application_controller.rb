@@ -22,6 +22,7 @@ class ApplicationController < Sinatra::Base
 
   
   helpers do
+    
     def logged_in?
       !!session[:user_id]
     end
@@ -46,7 +47,6 @@ class ApplicationController < Sinatra::Base
       session.clear
     end
 
-    
   end
 
 end

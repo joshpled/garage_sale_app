@@ -43,20 +43,14 @@ class ItemsController < ApplicationController
   end
 
   patch "/items/:id/sold" do
-    if logged_in?
-      item = current_user.items.find_by_id(params[:id])
+    logged_in_else_redirect_login
+    item = current_user.items.find_by_id(params[:id])
       if item
-          if item.update(sold:params[:name])
-              redirect "/items"
-          end
-      else
-        redirect '/users'
+         item.update(sold: true)
+          redirect "/items"
     end
-  else
-      redirect '/users/login'
   end
-  end
-  
+
   # PATCH: /items/5
   patch "/items/:id" do
     if logged_in?

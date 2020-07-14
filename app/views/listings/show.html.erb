@@ -1,57 +1,59 @@
 <div class="jumbotron" id="title">
-<h1 class="display-4" style="text-align: center;"><%=@listing.title%></h1>
-      <p class="lead" style="text-align: center;"><%=@listing.description%></p></div>
+  <h1 class="display-4" style="text-align: center;"><%=@listing.title%></h1>
+  <p class="lead" style="text-align: center;"><%=@listing.description%></p>
+</div>
 <br>
- <div class="container">
- <br>
-     
-<%if @listing.items.empty?%>
-<h3 class="display-4">List is empty, add an item!</h3>
-<%else%>
-<table class="table">
+<div class="container">
+  <br>
+  <%if @listing.items.empty?%>
+    <h3 class="display-4">List is empty, add an item!</h3>
+  <%else%>
+    <table class="table">
       <thead>
         <tr>
-      <th scope="col">Item</th>
-      <th scope="col">Category</th>
-      <th scope="col">Price</th>
-    <%if @listing.user_id == session[:user_id]%><th scope="col">Sold?</th><th scope="col">Edit</th><%end%>
-  </tr>
-  </thead>
-  <tbody>
-      <%@listing.items.each do |i|%>
-        <%if i.sold == false%>
-        <tr><td><%=i.name%></td>
-             <td><%=i.category%></td>
-            <td>$<%=sprintf("%.2f", i.price)%></td>
-            <%if @listing.user_id == session[:user_id]%>
-            <td><form method="POST" action="/items/<%=i.id%>?_method=DELETE" class="container">
-    <button type="submit" class="btn btn-warning">Sold!</button>
-</form></td><td><a href="/items/<%=i.id%>/edit"><button class="btn btn-info">Edit</button></a></td>
-            <%end%>
+          <th scope="col">Item</th>
+          <th scope="col">Category</th>
+          <th scope="col">Price</th>
+          <%if @listing.user_id == session[:user_id]%>
+            <th scope="col">Sold?</th>
+            <th scope="col">Edit</th>
+          <%end%>
+        </tr>
+      </thead>
+      <tbody>
+        <%@listing.items.each do |i|%>
+          <%if i.sold == false%>
+            <tr>
+              <td><%=i.name%></td>
+              <td><%=i.category%></td>
+              <td>$<%=sprintf("%.2f", i.price)%></td>
+              <%if @listing.user_id == session[:user_id]%>
+                <td>
+                  <form method="POST" action="/items/<%=i.id%>?_method=DELETE" class="container">
+                    <button type="submit" class="btn btn-warning">Sold!</button>
+                  </form>
+                </td>
+                <td><a href="/items/<%=i.id%>/edit"><button class="btn btn-info">Edit</button></a></td>
+              <%end%>
             </tr>
+          <%end%>
         <%end%>
-      <%end%>
-
       </tbody>
-      </table>
-      <%end%>
-<BR>
-
-      <%if @listing.user_id == session[:user_id] %>
-      <a href="/items/new/<%=@listing.id%>"><button class="btn btn-primary">Add Item</button></a>
-      <a href="/listings/<%=@listing.id%>/edit"><button class="btn btn-secondary">Edit Listing</button></a>
-      <br><br>
-      <form method="POST" action="/listings/<%= @listing.id %>">
+    </table>
+  <%end%>
+  <BR>
+  <%if @listing.user_id == session[:user_id] %>
+    <a href="/items/new/<%=@listing.id%>"><button class="btn btn-primary">Add Item</button></a>
+    <a href="/listings/<%=@listing.id%>/edit"><button class="btn btn-secondary">Edit Listing</button></a>
+    <br>
+    <br>
+    <form method="POST" action="/listings/<%= @listing.id %>">
       <button type="submit" formmethod="post" name="_method" value="delete" class="btn btn-danger">Delete Listing</button>
     </form>
-    <%else %>
-    
-     <a href = "mailto: <%= @listing.user.email %>"><button class="btn btn-primary">Contact Seller!</button></a>
-      <%end%>
-
-    <br>
-    <br>
-    <p style="text-align: right;">Created by <%=User.all.find_by_id(@listing.user_id).username%> on <%=@listing.created_at.strftime("%m/%d/%y")%>.</p>
-    </div>
-
-       
+  <%else %>
+    <a href = "mailto: <%= @listing.user.email %>"><button class="btn btn-primary">Contact Seller!</button></a>
+  <%end%>
+  <br>
+  <br>
+  <p style="text-align: right;">Created by <%=User.all.find_by_id(@listing.user_id).username%> on <%=@listing.created_at.strftime("%m/%d/%y")%>.</p>
+</div>
