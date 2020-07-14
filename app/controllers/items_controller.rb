@@ -2,25 +2,24 @@ class ItemsController < ApplicationController
 
   # GET: /items
   get "/items" do
-    if logged_in?
+    logged_in_else_redirect_login
     @items = current_user.items
     erb :"/items/index.html"
-    else
-      redirect '/'
-    end 
   end
 
   # GET: /items/new
-  get "/items/new" do
+  get "/items/new/:id" do
+    @listing = current_user.listings.find_by_id(params[:id])
     erb :"/items/new.html"
   end
 
     # POST: /items/new
-  post "/items/new" do
-    item = Item.new(params)
+  post "/items/new/:id" do
+    item = Item.new(name:params[:name],category:params[:category],price:params[:price])
     item.save
-    current_user.listings.last.items<<item
-    redirect "/listings/#{current_user.listings.last.id}"
+    listing = current_user.listings.find_by_id(params[:id])
+    listing.items<<item
+    redirect "/listings/#{listing.id}"
   end
 
   # POST: /items
@@ -43,7 +42,21 @@ class ItemsController < ApplicationController
     end 
   end
 
-
+  patch "/items/:id/sold" do
+    if logged_in?
+      item = current_user.items.find_by_id(params[:id])
+      if item
+          if item.update(sold:params[:name])
+              redirect "/items"
+          end
+      else
+        redirect '/users'
+    end
+  else
+      redirect '/users/login'
+  end
+  end
+  
   # PATCH: /items/5
   patch "/items/:id" do
     if logged_in?
@@ -62,20 +75,6 @@ class ItemsController < ApplicationController
   end
   end
 
-  patch "/items/:id/sold" do
-    if logged_in?
-      item = current_user.items.find_by_id(params[:id])
-      if item
-          if item.update(sold:params[:name])
-              redirect "/items"
-          end
-      else
-        redirect '/users'
-    end
-  else
-      redirect '/users/login'
-  end
-  end
   
   # DELETE: /items/5/delete
   post "/items/:id" do

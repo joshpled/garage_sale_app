@@ -1,14 +1,19 @@
-<h2 align='center'>ALL ITEMS</h2>
- 
- <table style="width:100%">
+<div class="jumbotron" id="title">
+<h1 class="display-4" style="text-align: center;">ALL ITEMS</h1></div>
+ <div class="container">
+ <br>
+ <table class="table">
+ <thead>
       <tr>
-    <th>Item</th>
-    <th>Category</th>
-    <th>Price</th>
-    <th>Listing</th>
-    <th>Sold!</th>
-    <th>Edit</th>
+    <th scope="col">Item</th>
+    <th scope="col">Category</th>
+    <th scope="col">Price</th>
+    <th scope="col">Listing</th>
+    <th scope="col">Sold!</th>
+    <th scope="col">Edit</th>
   </tr>
+  </thead>
+  <tbody>
       <%@items.order(name: :asc).each do |i|%>
       
         <tr><td><%=i.name%></td>
@@ -17,14 +22,14 @@
             <td><a href="/listings/<%=i.listing_id%>"><%=Listing.all.find_by_id(i.listing_id).title%></a></td>
             <td>
             <%if i.sold == false%>
-            <form method="POST" action="/items/<%=i.id%>/sold?_method=PATCH">
-                <button type="submit">Sold</button></form></td>
+            <form method="POST" action="/items/<%=i.id%>/sold">
+                <button type="submit" formmethod="post" name="_method" value="patch">Sold</button></form></td>
                 <%else%>
                 SOLD
                 <%end%>
             <td><a href="/items/<%=i.id%>/edit"><button>Edit</button></a></td>
             <%end%>
             </tr>
-
+</tbody>
       </table>
-      
+      </div>

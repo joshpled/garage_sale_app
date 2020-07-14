@@ -25,8 +25,8 @@
             <td>$<%=sprintf("%.2f", i.price)%></td>
             <%if @listing.user_id == session[:user_id]%>
             <td><form method="POST" action="/items/<%=i.id%>?_method=DELETE" class="container">
-    <button type="submit">Sold!</button>
-</form></td><td><a href="/items/<%=i.id%>/edit"><button>Edit</button></a></td>
+    <button type="submit" class="btn btn-warning">Sold!</button>
+</form></td><td><a href="/items/<%=i.id%>/edit"><button class="btn btn-info">Edit</button></a></td>
             <%end%>
             </tr>
         <%end%>
@@ -38,7 +38,7 @@
 <BR>
 
       <%if @listing.user_id == session[:user_id] %>
-      <a href="/items/new"><button class="btn btn-primary">Add Item</button></a>
+      <a href="/items/new/<%=@listing.id%>"><button class="btn btn-primary">Add Item</button></a>
       <a href="/listings/<%=@listing.id%>/edit"><button class="btn btn-secondary">Edit Listing</button></a>
       <br><br>
       <form method="POST" action="/listings/<%= @listing.id %>">

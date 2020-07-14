@@ -1,9 +1,12 @@
-<center><div class="container">
-<form action="/items/new" method="post">
-<label>Name: </label><input type="text" name="name"><br>
-<label>Category: </label><input type="text" name="category"><br>
-<label>Price: </label><input type="number" name="price"><br>
+<center>
+<br>
+<div class="container">
+<h1>New Item:</h1>
+<form class="form-group" action="/items/new/<%=@listing.id%>" method="post">
+<input type="text" name="name" placeholder="Name" class="form-control"><br>
+<input type="text" name="category" class="form-control" placeholder="Category"><br>
+<input type="number" name="price" class="form-control" placeholder="Price"><br>
 
-<button type="submit" value="Submit" class="button button1">Submit</button>
+<button type="submit" value="Submit" class="btn btn-primary">Submit</button>
 </form>
 </div><center>

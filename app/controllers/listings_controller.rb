@@ -18,7 +18,7 @@ class ListingsController < ApplicationController
     listing = Listing.new(params)
     listing.save
     current_user.listings<<listing
-    redirect '/items/new'
+    redirect "/items/new/#{listing.id}"
   end
 
   # GET: /listings/5
