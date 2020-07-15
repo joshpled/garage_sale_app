@@ -13,6 +13,7 @@ gem 'bcrypt'
 gem 'tux'
 gem 'rack-flash3'
 gem 'htmlbeautifier'
+gem 'rufo'
 
 group :test do
   gem 'rspec'

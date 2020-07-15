@@ -28,6 +28,6 @@ class User < ActiveRecord::Base
     validates :email, uniqueness: true,
                         format: { with: URI::MailTo::EMAIL_REGEXP } 
 
-    validates :username, uniqueness: true
+    validates :username, uniqueness: true, presence: true
 
 end

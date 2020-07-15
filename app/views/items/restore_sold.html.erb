@@ -1,29 +1,34 @@
-<br>
-<h2 align='center'>ALL ITEMS</h2>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Item</th>
-      <th scope="col">Category</th>
-      <th scope="col">Price</th>
-      <th scope="col">Listing</th>
-      <th scope="col">Not Sold?</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%@items.order(name: :asc).each do |i|%>
-      <tr>
-        <td><%=i.name%></td>
-        <td><%=i.category%></td>
-        <td>$<%=sprintf("%.2f", i.price)%></td>
-        <td><a href="/listings/<%=i.listing_id%>"><%=Listing.all.find_by_id(i.listing_id).title%></a></td>
-        <td>
-          <%if i.sold == true%>
-            <form method="POST" action="/items/<%=i.id%>/sold">
-              <button type="submit" formmethod="post" name="_method" value="delete">Not Sold?</button></form>
-          </td>
-        <%end%>
-      <%end%>
-    </tr>
-  </tbody>
-</table>
+<div class="jumbotron" id="title">
+  <h1 class="display-4" style="text-align: center;">SOLD ITEMS</h1>
+</div>
+<div class="container">
+  <%if @items.any? {|i| i.sold == true}%>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Item</th>
+          <th scope="col">Category</th>
+          <th scope="col">Price</th>
+          <th scope="col">Listing</th>
+          <th scope="col">Not Sold?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%@items.order(name: :asc).each do |i|%>
+          <tr>
+            <td><%=i.name%></td>
+            <td><%=i.category%></td>
+            <td>$<%=sprintf("%.2f", i.price)%></td>
+            <td><a href="/listings/<%=i.listing_id%>"><%=Listing.all.find_by_id(i.listing_id).title%></a></td>
+            <td>
+              <form method="POST" action="/items/<%=i.id%>/sold">
+                <button type="submit" formmethod="post" name="_method" value="delete">Not Sold?</button></form>
+            </td>
+          <%end%>
+        </tr>
+      </tbody>
+    </table>
+  <%else%>
+    <center><h1 class="display-4">NO ITEMS SOLD</h1>
+  <%end%>
+</div>

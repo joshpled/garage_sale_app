@@ -8,21 +8,10 @@ class UsersController < ApplicationController
 
   # GET: /users/new
   get "/users/signup" do
-    @signup_error = flash[:signup_error]
-    if logged_in?
-      redirect '/users'
-    else
-      erb :"/users/new.html"
-    end
-  end 
-  
-  #GET: /users/login
-  get '/users/login' do
-    @login_error = flash[:login_error]
-    erb :"/users/login.html"
+    erb :"/users/new.html"
   end
 
-  get '/users/delete' do
+  get "/users/delete" do
     if logged_in?
       erb :"users/delete_account.html"
     else
@@ -34,35 +23,21 @@ class UsersController < ApplicationController
   post "/users/signup" do
     @user = User.new(params)
     if @user.save
-        session[:user_id] = @user.id
-        redirect '/users'
+      session[:user_id] = @user.id
+      redirect "/users"
     else
-      redirect '/users/signup'
-    end 
-  end 
-
-  # POST: /users 
-  post "/users/login" do
-    @user = User.find_by(username: params[:username])
-      if @user && @user.authenticate(params[:password])
-          session[:user_id] = @user.id
-          redirect '/users'
-      else
-          flash[:login_error] = "Please enter the correct username or password"
-          redirect '/users/login'
-      end
-  end
-  
-  #GET: /users/logout
-  get '/users/logout' do 
-    if logged_in?
-      logout!
-      redirect '/'
+      redirect "/users/signup"
     end
-      redirect '/'
-  end 
-  
-  get '/users/edit' do
+  end
+
+  #GET: /users/logout
+  get "/users/logout" do
+    logged_in_else_redirect_login
+    logout!
+    redirect "/"
+  end
+
+  get "/users/edit" do
     erb :"/users/change_user.html"
   end
 
@@ -72,13 +47,12 @@ class UsersController < ApplicationController
       if user
         user.update(params)
       else
-        redirect '/users/edit'
-      end 
+        redirect "/users/edit"
+      end
     else
-      redirect '/'
+      redirect "/"
     end
   end
-
 
   delete "/users/:id" do
     if logged_in?
@@ -86,18 +60,16 @@ class UsersController < ApplicationController
       if user
         user.items.each do |i|
           Items.all.find_by_id(i.id).delete
-        end 
+        end
         user.listings.each do |l|
           Listing.all.find_by_id(l.id).delete
-        end 
+        end
         user.delete
         session.clear
       end
-      redirect '/'
-      else
-        redirect '/users/login'
-      end
+      redirect "/"
+    else
+      redirect "/users/login"
     end
-
-end 
-
+  end
+end

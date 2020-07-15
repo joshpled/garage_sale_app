@@ -1,4 +1,10 @@
 <br>
+<%if @login_error != nil%>
+<div class="alert alert-danger alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong><%=@login_error%></strong>
+  </div>
+  <%end%>
 <center>
   <div class="container">
     <form action='/users/login' method="post">

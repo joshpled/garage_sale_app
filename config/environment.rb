@@ -9,8 +9,8 @@ ActiveRecord::Base.establish_connection(
 )
 
 require 'Date'
-require 'sinatra/base'
-require 'rack-flash'
+
 
 require './app/controllers/application_controller'
+require 'rack-flash'
 require_all 'app'

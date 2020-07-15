@@ -1,0 +1,29 @@
+<%if read_error_messages != nil%>
+<div class="alert alert-danger alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong><%=read_error_messages%></strong>
+  </div>
+  <%end%>
+
+
+    <%if @name_error != nil%>
+                        <%@name_error.each do |name_error| %>
+                        <div class="alert alert-danger" role="alert">
+                         <%= "Name " + name_error%>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <%end%>
+                    <%end%>
+
+ <%if @name_error != nil%>
+            <%@name_error.each do |name_error| %>
+              <div class="alert alert-danger" role="alert">
+                <%= "Name " + name_error%>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            <%end%>
+          <%end%>
