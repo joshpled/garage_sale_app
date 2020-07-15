@@ -8,9 +8,5 @@ ActiveRecord::Base.establish_connection(
   :database => "db/#{ENV['SINATRA_ENV']}.sqlite"
 )
 
-require 'Date'
-
-
 require './app/controllers/application_controller'
-require 'rack-flash'
 require_all 'app'

@@ -1,5 +1,7 @@
 require "./config/environment"
 require "sinatra/base"
+require "rack-flash"
+require "Date"
 require "pry"
 
 class ApplicationController < Sinatra::Base

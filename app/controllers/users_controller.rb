@@ -11,15 +11,6 @@ class UsersController < ApplicationController
     erb :"/users/new.html"
   end
 
-  get "/users/delete" do
-    if logged_in?
-      erb :"users/delete_account.html"
-    else
-      erb :"/users/login.html"
-    end
-  end
-
-  #POST: /users/signup
   post "/users/signup" do
     @user = User.new(params)
     if @user.save
@@ -28,13 +19,6 @@ class UsersController < ApplicationController
     else
       redirect "/users/signup"
     end
-  end
-
-  #GET: /users/logout
-  get "/users/logout" do
-    logged_in_else_redirect_login
-    logout!
-    redirect "/"
   end
 
   get "/users/edit" do
@@ -51,6 +35,14 @@ class UsersController < ApplicationController
       end
     else
       redirect "/"
+    end
+  end
+
+  get "/users/delete" do
+    if logged_in?
+      erb :"users/delete_account.html"
+    else
+      erb :"/users/login.html"
     end
   end
 

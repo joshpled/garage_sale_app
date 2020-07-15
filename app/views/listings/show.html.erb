@@ -29,8 +29,8 @@
               <td>$<%=sprintf("%.2f", i.price)%></td>
               <%if @listing.user_id == session[:user_id]%>
                 <td>
-                  <form method="POST" action="/items/<%=i.id%>/sold?_method=PATCH" class="container">
-                    <button type="submit" class="btn btn-warning">Sold!</button>
+                  <form method="POST" action="/items/<%=i.id%>/sold" class="container">
+                    <button type="submit" class="btn btn-warning" formmethod="post" name="_method" value="patch">Sold!</button>
                   </form>
                 </td>
                 <td><a href="/items/<%=i.id%>/edit"><button class="btn btn-info">Edit</button></a></td>
