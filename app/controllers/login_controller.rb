@@ -1,5 +1,6 @@
 class LoginController < ApplicationController
   get "/users/login" do
+    @login_error = flash[:login_error]
     erb :"/users/login.html"
   end
 
@@ -9,6 +10,7 @@ class LoginController < ApplicationController
       session[:user_id] = @user.id
       redirect "/users"
     else
+      flash[:login_error] = "Please enter the correct username or password"
       redirect "/users/login"
     end
   end
