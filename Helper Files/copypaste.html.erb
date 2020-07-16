@@ -1,0 +1,15 @@
+
+  get "/users/edit" do
+    logged_in_else_redirect_login
+    erb :"/users/change_user.html"
+  end
+
+  patch "/users/:id" do
+    logged_in_else_redirect_login
+      if current_user
+        current_user.update(params)
+      else
+        flash[:email_error] = "INVALID INPUTS"
+        redirect "/users/edit"
+      end
+  end

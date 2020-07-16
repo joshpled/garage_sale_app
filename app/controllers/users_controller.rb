@@ -23,19 +23,6 @@ class UsersController < ApplicationController
     end
   end
 
-  get "/users/edit" do
-    erb :"/users/change_user.html"
-  end
-
-  patch "/users/:id" do
-    logged_in_else_redirect_home
-      user = User.all.find_by_id(params[:id])
-      if user
-        user.update(params)
-      else
-        redirect "/users/edit"
-      end
-  end
 
   get "/users/delete" do
     logged_in_else_redirect_login

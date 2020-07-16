@@ -13,8 +13,7 @@ class User < ActiveRecord::Base
   (?=.*[[:^alnum:]]) # Must contain a symbol
 /x
 
-  validates :password, :presence => true,
-                       :confirmation => true,
+  validates :password, :confirmation => true,
                        :length => { :within => 6..40 },
                        format: { with: PASSWORD_FORMAT },
                        :on => :create
