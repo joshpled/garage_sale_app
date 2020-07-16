@@ -63,6 +63,10 @@ class ApplicationController < Sinatra::Base
       @username_used = flash[:username_used]
       @email_used = flash[:email_used]
     end
+    
+    def number_to_currency(num)
+      "$#{num.to_s.gsub(/\d(?=(...)+$)/, '\0,')}"
+    end
 
   end
 end

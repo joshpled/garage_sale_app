@@ -66,4 +66,13 @@ class ItemsController < ApplicationController
     item.delete
     redirect "/listings/#{listing.id}"
   end
+
+  delete "/items/:id/delete" do
+    item = Item.find_by_id(params[:id])
+    listing = Listing.all.find_by_id(item.listing.id)
+    listing.items.find_by_id(params[:id]).delete
+    item.delete
+    redirect "/listings/#{listing.id}"
+  end
+  
 end

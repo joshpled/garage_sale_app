@@ -24,9 +24,12 @@ class ListingsController < ApplicationController
   end
 
   get "/listings/:id/edit" do
-    logged_in_else_redirect_login
-    @listing = current_user.listings.find_by_id(params[:id])
-    erb :"/listings/edit.html"
+      @listing = current_user.listings.find_by_id(params[:id])
+    if @listing.user_id == session[:user_id]
+      erb :"/listings/edit.html"
+    else
+      redirect '/'
+    end 
   end
 
   patch "/listings/:id" do

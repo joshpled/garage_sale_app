@@ -23,7 +23,6 @@ class UsersController < ApplicationController
     end
   end
 
-
   get "/users/delete" do
     logged_in_else_redirect_login
       erb :"users/delete_account.html"
