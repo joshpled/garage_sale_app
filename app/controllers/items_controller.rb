@@ -42,8 +42,8 @@ class ItemsController < ApplicationController
         item.update(sold: true)
       else
         item.update(sold: false)
-      end 
-      redirect "/listings/#{item.listing.id}"
+      end
+      redirect back
     end
   end
 

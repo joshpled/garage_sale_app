@@ -6,7 +6,7 @@
     <p class="lead">Must be logged in to see the posts!</p>
   </div>
   <br>
-  <%if @test.empty?%>
+  <%if @test.empty? || @test.all? {|i| i.sold == true}%>
     <h1 class="display-3 text-center">No Listings Available</h1>
   <%else%>
     <table class="table">
@@ -19,7 +19,7 @@
       </thead>
       <tbody>
         <%Listing.all.order(created_at: :desc).each do |l|%>
-          <%if !l.items.empty?%>
+          <%if !l.items.empty? && !l.items.all? {|i| i.sold == true}%>
             <tr>
               <td><%=l.created_at.strftime("%m/%d/%y")%></td>
               <td><a href="/listings/<%=l.id%>"><%=l.title%></a></td>

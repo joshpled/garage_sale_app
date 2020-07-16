@@ -15,15 +15,17 @@
       </thead>
       <tbody>
         <%@items.order(name: :asc).each do |i|%>
-          <tr>
+        <tr>
+        <%if i.sold == true%>
             <td><%=i.name%></td>
             <td><%=i.category%></td>
             <td>$<%=sprintf("%.2f", i.price)%></td>
             <td><a href="/listings/<%=i.listing_id%>"><%=Listing.all.find_by_id(i.listing_id).title%></a></td>
             <td>
               <form method="POST" action="/items/<%=i.id%>/sold">
-                <button type="submit" formmethod="post" name="_method" value="patch">Not Sold?</button></form>
+                <button type="submit" formmethod="post" name="_method" value="patch" class="btn btn-outline-dark">Not Sold?</button></form>
             </td>
+          <%end%>
           <%end%>
         </tr>
       </tbody>

@@ -45,6 +45,11 @@
   <%if @listing.user_id == session[:user_id] %>
     <a href="/items/new/<%=@listing.id%>"><button class="btn btn-primary">Add Item</button></a>
     <a href="/listings/<%=@listing.id%>/edit"><button class="btn btn-secondary">Edit Listing</button></a>
+    <%if @listing.items.any? {|item| item.sold == true}%>
+  <div class="float-right">
+    <a href="/items/restore"><button class="btn btn-dark">Restore Sold</button></a>
+  </div>
+<%end%>
     <br>
     <br>
     <form method="POST" action="/listings/<%= @listing.id %>">
@@ -54,6 +59,6 @@
     <a href = "mailto: <%= @listing.user.email %>"><button class="btn btn-primary">Contact Seller!</button></a>
   <%end%>
   <br>
-  <br>
   <p style="text-align: right;">Created by <%=User.all.find_by_id(@listing.user_id).username%> on <%=@listing.created_at.strftime("%m/%d/%y")%>.</p>
 </div>
+

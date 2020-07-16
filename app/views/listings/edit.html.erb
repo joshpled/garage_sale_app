@@ -1,17 +1,26 @@
 <div class="container">
-  <div class="jumbotron">
-    <h1 class="display-4">EDIT YOUR POST</h1>
+  <br>
+  <div class="panel panel-default">
+    <div class="panel-heading text-center">
+      <h3 class="panel-title">Edit Your Post</h3>
+    </div>
+    <BR>
+    <div class="panel-body">
+      <form action="/listings/<%=@listing.id%>" method="POST">
+        <input type="hidden" id="hidden" name="_method" value="patch">
+        <div class="form-group">
+          <label>Title: </label>
+          <input type="text" name="title" id="title" class="form-control input-sm" value="<%=@listing.title%>" required>
+        </div>
+        <div class="form-group">
+          <label>Description: </label>
+          <textarea name="description" class="form-control" id="description" rows="3" required><%=@listing.description%></textarea>
+        </div>
+        <input type="submit" value="Edit" class="btn btn-info btn-block">
+      </form>
+    </div>
   </div>
-  <div class="container">
-    <form method="post" action="/listings/<%=@listing.id%>">
-      <input type="hidden" id="hidden" name="_method" value="patch">
-      <br>
-      <label>Title:</label>
-      <input type="text" name="title" value="<%=@listing.title %>">
-      <br>
-      <label>Description:</label>
-      <textarea name="description"><%= @listing.description %></textarea>
-      <br>
-      <input type="submit" class="button button1" value="Submit Changes">
-    </form>
-  </div>
+</div>
+
+
+
