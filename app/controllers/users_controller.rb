@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   # GET: /users/new
   get "/users/signup" do
+    create_user_error_messages_reader
     erb :"/users/new.html"
   end
 
@@ -17,6 +18,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect "/users"
     else
+      create_user_error_messages(@user)
       redirect "/users/signup"
     end
   end
@@ -26,32 +28,26 @@ class UsersController < ApplicationController
   end
 
   patch "/users/:id" do
-    if logged_in?
+    logged_in_else_redirect_home
       user = User.all.find_by_id(params[:id])
       if user
         user.update(params)
       else
         redirect "/users/edit"
       end
-    else
-      redirect "/"
-    end
   end
 
   get "/users/delete" do
-    if logged_in?
+    logged_in_else_redirect_login
       erb :"users/delete_account.html"
-    else
-      erb :"/users/login.html"
-    end
   end
 
   delete "/users/:id" do
-    if logged_in?
+    logged_in_else_redirect_login
       user = User.all.find_by_id(params[:id])
       if user
         user.items.each do |i|
-          Items.all.find_by_id(i.id).delete
+          Item.all.find_by_id(i.id).delete
         end
         user.listings.each do |l|
           Listing.all.find_by_id(l.id).delete
@@ -59,9 +55,6 @@ class UsersController < ApplicationController
         user.delete
         session.clear
       end
-      redirect "/"
-    else
-      redirect "/users/login"
-    end
-  end
+      redirect '/'
+    end 
 end

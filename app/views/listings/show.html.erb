@@ -5,7 +5,7 @@
 <br>
 <div class="container">
   <br>
-  <%if @listing.items.empty?%>
+  <%if !@listing.items.any? {|i| i.sold == false}%>
     <h3 class="display-4">List is empty, add an item!</h3>
   <%else%>
     <table class="table">

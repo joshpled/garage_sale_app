@@ -1,4 +1,3 @@
-<br>
 <% if @login_error != nil %>
   <div class="alert alert-danger" role="alert">
     <%= @login_error%>
@@ -7,6 +6,7 @@
     </button>
   </div>
 <% end %>
+<br>
 <center>
   <div class="container">
     <form action='/users/login' method="post">

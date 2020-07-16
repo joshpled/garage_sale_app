@@ -3,9 +3,9 @@
   <div class="container">
     <h1>New Item:</h1>
     <form class="form-group" action="/items/new/<%=@listing.id%>" method="post">
-      <input type="text" name="name" placeholder="Name" class="form-control"><br>
-      <input type="text" name="category" class="form-control" placeholder="Category"><br>
-      <input type="number" name="price" class="form-control" placeholder="Price"><br>
+      <input type="text" name="name" placeholder="Name" class="form-control" required><br>
+      <input type="text" name="category" class="form-control" placeholder="Category" required><br>
+      <input type="number" name="price" class="form-control" placeholder="Price" required><br>
       <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
     </form>
   </div>

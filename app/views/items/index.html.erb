@@ -24,12 +24,12 @@
           <td>
             <%if i.sold == false%>
               <form method="POST" action="/items/<%=i.id%>/sold">
-                <button type="submit" formmethod="post" name="_method" value="patch">Sold</button></form>
+                <button type="submit" formmethod="post" name="_method" value="patch" class="btn btn-warning">Sold</button></form>
             </td>
           <%else%>
             SOLD
           <%end%>
-          <td><a href="/items/<%=i.id%>/edit"><button>Edit</button></a></td>
+          <td><a href="/items/<%=i.id%>/edit"><button class="btn btn-info">Edit</button></a></td>
         <%end%>
       </tr>
     </tbody>

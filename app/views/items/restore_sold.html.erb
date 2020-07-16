@@ -22,7 +22,7 @@
             <td><a href="/listings/<%=i.listing_id%>"><%=Listing.all.find_by_id(i.listing_id).title%></a></td>
             <td>
               <form method="POST" action="/items/<%=i.id%>/sold">
-                <button type="submit" formmethod="post" name="_method" value="delete">Not Sold?</button></form>
+                <button type="submit" formmethod="post" name="_method" value="patch">Not Sold?</button></form>
             </td>
           <%end%>
         </tr>

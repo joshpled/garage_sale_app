@@ -1,6 +1,6 @@
 require "./config/environment"
-require "sinatra/base"
-require "rack-flash"
+require 'sinatra/base'
+require 'sinatra/flash'
 require "Date"
 require "pry"
 
@@ -11,9 +11,8 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, "secret"
   end
+  register Sinatra::Flash
   
-  use Rack::Flash
-
   get "/" do
     if current_user && logged_in?
       redirect "/users"
@@ -48,11 +47,12 @@ class ApplicationController < Sinatra::Base
     end
 
     def create_user_error_messages(user)
-      flash[:password_error] = user.errors.messages[:password]
-      flash[:password_confirmation] = user.errors.messages[:password_confirmation]
-      flash[:email_error] = user.errors.messages[:email]
-      flash[:name_error] = user.errors.messages[:first_name]
-      flash[:username_error] = user.errors.messages[:username]
+      flash[:password_error] = user.errors.messages[:password][0]
+      flash[:password_confirmation] = user.errors.messages[:password_confirmation][0]
+      flash[:email_error] = user.errors.messages[:email][0]
+      flash[:username_error] = user.errors.messages[:username][0]
+      flash[:username_used]  = user.username
+      flash[:email_used] = user.email
     end
 
     def create_user_error_messages_reader
@@ -60,7 +60,9 @@ class ApplicationController < Sinatra::Base
       @passconfirm_error = flash[:password_confirmation]
       @email_error = flash[:email_error]
       @username_error = flash[:username_error]
-      @name_error = flash[:name_error]
+      @username_used = flash[:username_used]
+      @email_used = flash[:email_used]
     end
+
   end
 end

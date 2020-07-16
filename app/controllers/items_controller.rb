@@ -37,8 +37,13 @@ class ItemsController < ApplicationController
     logged_in_else_redirect_login
     item = current_user.items.find_by_id(params[:id])
     if item
-      item.update(sold: true)
-      redirect
+      case item.sold
+      when false
+        item.update(sold: true)
+      else
+        item.update(sold: false)
+      end 
+      redirect "/listings/#{item.listing.id}"
     end
   end
 
