@@ -6,8 +6,13 @@ class ItemsController < ApplicationController
   end
 
   get "/items/new/:id" do
+    logged_in_else_redirect_login
     @listing = current_user.listings.find_by_id(params[:id])
+    if @listing.user_id == session[:user_id]
     erb :"/items/new.html"
+    else
+      redirect '/'
+    end
   end
 
   post "/items/new/:id" do
@@ -24,7 +29,11 @@ class ItemsController < ApplicationController
 
   get "/items/:id/edit" do
     @item = Item.all.find_by_id(params[:id])
+    if @item.user.id == session[:user_id]
     erb :"/items/edit.html"
+    else
+      redirect '/'
+    end
   end
 
   get "/items/restore" do

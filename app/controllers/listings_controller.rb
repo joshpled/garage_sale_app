@@ -24,7 +24,7 @@ class ListingsController < ApplicationController
   end
 
   get "/listings/:id/edit" do
-      @listing = current_user.listings.find_by_id(params[:id])
+      @listing = Listing.find_by_id(params[:id])
     if @listing.user_id == session[:user_id]
       erb :"/listings/edit.html"
     else
