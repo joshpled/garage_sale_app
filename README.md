@@ -1,78 +1,59 @@
-# Product Name
-> Short blurb about what your product does.
+# Shelterluv
 
-[![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url]
+This gem was created for the PIBA Foundation in St. Petersburg, Florida.
+The main use for this gem is for any shelter to use ShelterLuv and extract the information required for populating website and animal information. 
 
-One to two paragraph statement about your product and what it does.
+`bin/executable` will run Cli.rb and start a new session for the ShelterLuv PIBA Foundation Database.
+Please note, as of V. 0.1.0 there are still some notable bugs. 
 
-![](header.png)
+To experiment with that code, run `bin/console` for an interactive prompt.
+
+TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
-OS X & Linux:
+Add this line to your application's Gemfile:
 
-```sh
-npm install my-crazy-module --save
+```ruby
+gem 'shelterluv'
 ```
 
-Windows:
+And then execute:
 
-```sh
-edit autoexec.bat
+    $ bundle install
+
+Or install it yourself as:
+
+    $ gem install shelterluv
+
+## Usage
+
+In API.RB
 ```
-
-## Usage example
-
-A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
-
-_For more examples and usage, please refer to the [Wiki][wiki]._
-
-## Development setup
-
-Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
-
-```sh
-make install
-npm test
+request["x-api-key"] = #place API key here
 ```
+The artii gem will display ascii words. 
+    
+    $ variable = Artii::Base.new
+    $ puts variable.asciify('WORD OR WORDS TO DISPLAY')
 
-## Release History
+See artii documentation for more details: https://github.com/miketierney/artii
 
-* 0.2.1
-    * CHANGE: Update docs (module code remains unchanged)
-* 0.2.0
-    * CHANGE: Remove `setDefaultXYZ()`
-    * ADD: Add `init()`
-* 0.1.1
-    * FIX: Crash when calling `baz()` (Thanks @GenerousContributorName!)
-* 0.1.0
-    * The first proper release
-    * CHANGE: Rename `foo()` to `bar()`
-* 0.0.1
-    * Work in progress
+## Development
 
-## Meta
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-Your Name – [@YourTwitter](https://twitter.com/dbader_org) – YourEmail@example.com
-
-Distributed under the XYZ license. See ``LICENSE`` for more information.
-
-[https://github.com/yourname/github-link](https://github.com/dbader/)
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
-1. Fork it (<https://github.com/yourname/yourproject/fork>)
-2. Create your feature branch (`git checkout -b feature/fooBar`)
-3. Commit your changes (`git commit -am 'Add some fooBar'`)
-4. Push to the branch (`git push origin feature/fooBar`)
-5. Create a new Pull Request
+Bug reports and pull requests are welcome on GitHub at hhttps://github.com/joshpled/CLI_Project_PIBA. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/joshpled/CLI_Project_PIBA/blob/master/CODE_OF_CONDUCT.md).
 
-<!-- Markdown link & img dfn's -->
-[npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/datadog-metrics
-[npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
-[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
-[wiki]: https://github.com/yourname/yourproject/wiki
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+## Code of Conduct
+
+Everyone interacting in the Shelterluv project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/joshpled/CLI_Project_PIBA/blob/master/CODE_OF_CONDUCT.md).
