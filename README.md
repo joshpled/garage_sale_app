@@ -21,11 +21,11 @@ Users are able to:
 
 ## Screenshots
 
-![1](app/assets/images/SS1.png)
-![2](app/assets/images/SS2.png)
-![3](app/assets/images/SS3.png)
-![4](app/assets/images/SS4.png)
-![5](app/assets/images/SS5.png)
+![1](/images/SS1.png)
+![2](/images/SS2.png)
+![3](/images/SS3.png)
+![4](/images/SS4.png)
+![5](/images/SS5.png)
 
 ## Contributing
 
