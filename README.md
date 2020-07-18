@@ -21,11 +21,11 @@ Users are able to:
 
 ## Screenshots
 
-![1](/images/SS1.png)
-![2](/images/SS2.png)
-![3](/images/SS3.png)
-![4](/images/SS4.png)
-![5](/images/SS5.png)
+![1](public/images/SS1.png)
+![2](public/images/SS2.png)
+![3](public/images/SS3.png)
+![4](public/images/SS4.png)
+![5](public/images/SS5.png)
 
 ## Contributing
 
