@@ -28,7 +28,8 @@ class ItemsController < ApplicationController
   end
 
   get "/items/:id/edit" do
-    @item = Item.all.find_by_id(params[:id])
+    logged_in_else_redirect_login
+    @item = current_user.items.find_by_id(params[:id])
     if @item.user.id == session[:user_id]
     erb :"/items/edit.html"
     else
@@ -69,19 +70,29 @@ class ItemsController < ApplicationController
   end
 
   post "/items/:id" do
+    user_item = current_user.items.find_by_id(params[:id])
+    if user_item
     item = Item.find_by_id(params[:id])
     listing = Listing.all.find_by_id(item.listing.id)
     listing.items.find_by_id(params[:id]).delete
     item.delete
     redirect "/listings/#{listing.id}"
+    else
+      redirect back
+    end 
   end
 
   delete "/items/:id/delete" do
+    user_item = current_user.items.find_by_id(params[:id])
+    if 
     item = Item.find_by_id(params[:id])
     listing = Listing.all.find_by_id(item.listing.id)
     listing.items.find_by_id(params[:id]).delete
     item.delete
     redirect "/listings/#{listing.id}"
+    else 
+      redirect back
+    end 
   end
   
 end
